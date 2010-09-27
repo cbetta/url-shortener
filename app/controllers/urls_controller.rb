@@ -1,7 +1,7 @@
 class UrlsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
-  before_filter :validate_signature 
+  before_filter :validate_signature, :only => :create
   
   def index
     head :moved_permanently, :location => ROOT_URL
@@ -16,6 +16,15 @@ class UrlsController < ApplicationController
     respond_to do |format|
        format.html
        format.json
+    end
+  end
+  
+  def view 
+    url = Url.where(:hash => params['id']).first
+    if url.blank?
+      render :status => 404
+    else 
+      head :moved_permanently, :location => url.target
     end
   end
   
