@@ -2,7 +2,6 @@ class CreateUrls < ActiveRecord::Migration
   def self.up
     create_table :urls do |t|
       t.string :target
-      t.string :hash
 
       t.timestamps
     end

@@ -1,3 +1,5 @@
+require "base64"
+
 class UrlsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
@@ -9,9 +11,9 @@ class UrlsController < ApplicationController
   
   def create
     url = Url.find_or_create_by_target(params['url']);
-    url.create_hash
-
-    @short_url = "http://#{request.host_with_port}/#{url.hash}" 
+    hash = Base64.encode64(url.id.to_s).strip
+    
+    @short_url = "http://#{request.host_with_port}/#{hash}" 
     
     respond_to do |format|
        format.html
@@ -20,7 +22,8 @@ class UrlsController < ApplicationController
   end
   
   def view 
-    url = Url.where(:hash => params['id']).first
+    id = Base64.decode64(params[:id].strip).to_i
+    url = Url.where(:id => id).first
     if url.blank?
       render :status => 404
     else 

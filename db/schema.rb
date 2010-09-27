@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(:version => 20100927135622) do
 
   create_table "urls", :force => true do |t|
     t.string   "target"
-    t.string   "hash"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
