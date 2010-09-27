@@ -1,4 +1,6 @@
 Urlshortner::Application.routes.draw do
+  get "api/create"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
