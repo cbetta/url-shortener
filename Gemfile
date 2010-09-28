@@ -33,5 +33,4 @@ gem "mongrel", "1.2.0.pre2"
 gem "cgi_multipart_eof_fix"
 gem "fastthread"
 
-gem "memcache"
-gem "memcached-northscale", :require => "memcached"
+gem "memcached-northscale"
