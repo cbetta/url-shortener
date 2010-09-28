@@ -42,6 +42,7 @@ GEM
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
+    memcached-northscale (0.19.5.4)
     mime-types (1.16)
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
@@ -78,6 +79,7 @@ PLATFORMS
 DEPENDENCIES
   cgi_multipart_eof_fix
   fastthread
+  memcached-northscale
   mongrel (= 1.2.0.pre2)
   rails (= 3.0.0)
   sqlite3-ruby

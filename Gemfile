@@ -32,3 +32,5 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem "mongrel", "1.2.0.pre2"
 gem "cgi_multipart_eof_fix"
 gem "fastthread"
+
+gem "memcached-northscale"
