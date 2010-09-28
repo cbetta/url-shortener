@@ -1,0 +1,16 @@
+{
+ "name": "CGB.im Short URL Extension",
+ "version": "1.0",
+ "description": "Enables url shortening with the CGB.im shortener",
+ "browser_action": {
+ 	"popup" : "badge.html",
+ 	"default_icon": "images/badge.png"
+ },
+ "background_page": "background.html",
+ "permissions": [
+    "http://cgb.im/*"
+ ],
+ "icons": {
+     "128": "images/icon128.png"
+ }
+}

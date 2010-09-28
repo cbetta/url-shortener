@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+ * Copyright (c) 2010 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+  <head>
+  </head>
+  <body>
+	<script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+	
+    <script>		
+	  function shortenUrl(callback) {
+		// curl -d "signature=4e4eed5e89b80d31cb21f555b32af4711d47dcba&url=http://cristianobetta.com" -H "Accept: application/json"  http://127.0.0.1:3000/urls
+		$.ajax({
+		        beforeSend: function(xhrObj) {
+			                xhrObj.setRequestHeader("Accept","application/json");
+		        },
+		        type: "POST",
+				dataType: "json", 
+		        url: "http://cgb.im/urls",
+		        data: "url=http://cristianobetta.com&signature=4e4eed5e89b80d31cb21f555b32af4711d47dcba",
+		        success: function(json){
+					// console.log(json);
+		            // callback(json.url);
+		        },
+				error: function(xhr, textstatus, errorthrown) {
+					console.log(textstatus);
+				}
+		});
+	  }
+
+      /**
+       * Handles data sent via chrome.extension.sendRequest().
+       * @param request Object Data sent in the request.
+       * @param sender Object Origin of the request.
+       * @param callback Function The method to call when the request completes.
+       */
+      function onRequest(request, sender, callback) {
+        if (request.action == 'shortenUrl') {
+          	shortenUrl(callback);
+        } 
+      };
+
+      // Wire up the listener.
+      chrome.extension.onRequest.addListener(onRequest);
+    </script>
+  </body>
+</html>
