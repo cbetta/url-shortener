@@ -1,5 +1,7 @@
 $(document).ready(function(){	
-	chrome.extension.sendRequest({'action' : 'shortenUrl'}, setShortUrl);
+	chrome.tabs.getSelected(null, function(tab) {
+      chrome.extension.sendRequest({'action' : 'shortenUrl', 'data' : tab.url}, setShortUrl);
+    });
 });
 
 function setShortUrl(short_url) {

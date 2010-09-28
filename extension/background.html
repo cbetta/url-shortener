@@ -9,25 +9,30 @@
   </head>
   <body>
 	<script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javascripts/sha1.js" type="text/javascript" charset="utf-8"></script>
 	
     <script>		
-	  function shortenUrl(callback) {
-		// curl -d "signature=4e4eed5e89b80d31cb21f555b32af4711d47dcba&url=http://cristianobetta.com" -H "Accept: application/json"  http://127.0.0.1:3000/urls
+	  function shortenUrl(callback, url) {
+		if (window.localStorage.getItem(url)) {
+			callback(window.localStorage.getItem(url));
+			return;
+		}
+		
+		signature = sha1Hash('b573ce79af0179cde90bc6aa33e99039'+url);
+
 		$.ajax({
 		        beforeSend: function(xhrObj) {
 			                xhrObj.setRequestHeader("Accept","application/json");
 		        },
 		        type: "POST",
 		        url: "http://cgb.im/urls",
-		        data: "url=http://cristianobetta.com&signature=4e4eed5e89b80d31cb21f555b32af4711d47dcba",
-		        success: function(json){
-					console.log('succes');
-			
-					// console.log(json);
-		            // callback(json.url);
+		        data: "url="+url+"&signature="+signature,
+		        success: function(json){			
+					console.log(json);
+					window.localStorage.setItem(url, json.url);
+		            callback(json.url);
 		        },
 				error: function(xhr, textstatus, errorthrown) {
-					console.log(xhr.responseText);
 				}
 		});
 	  }
@@ -40,7 +45,7 @@
        */
       function onRequest(request, sender, callback) {
         if (request.action == 'shortenUrl') {
-          	shortenUrl(callback);
+          	shortenUrl(callback, request.data);
         } 
       };
 
