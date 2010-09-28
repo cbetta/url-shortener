@@ -17,15 +17,15 @@
 			callback(window.localStorage.getItem(url));
 			return;
 		}
-		
-		signature = sha1Hash('b573ce79af0179cde90bc6aa33e99039'+url);
+		secret = 'abc123'; //change this to your own secret
+		signature = sha1Hash(secret+url);
 
 		$.ajax({
 		        beforeSend: function(xhrObj) {
 			                xhrObj.setRequestHeader("Accept","application/json");
 		        },
 		        type: "POST",
-		        url: "http://cgb.im/urls",
+		        url: "http://xmpl.co/urls",
 		        data: "url="+url+"&signature="+signature,
 		        success: function(json){			
 					console.log(json);

@@ -7,5 +7,5 @@ Urlshortner::Application.initialize!
 # config.gem 'memcached-northscale', :lib => 'memcached'
 # require 'memcached'
 
-ROOT_URL = 'http://cgbdigital.com'
-SECRET = 'b573ce79af0179cde90bc6aa33e99039'
+ROOT_URL = 'http://example.com'
+SECRET = 'abc123' # change this to your own secret
